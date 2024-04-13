@@ -1,4 +1,4 @@
-package com.example.kaizen_app
+package in.ds.kaizen
 
 import io.flutter.embedding.android.FlutterActivity
 
