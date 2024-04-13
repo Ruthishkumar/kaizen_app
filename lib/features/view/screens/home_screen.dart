@@ -13,17 +13,26 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: InAppWebView(
-          onWebViewCreated: (InAppWebViewController controller) {
-            webViewController = controller;
-          },
-          initialOptions: InAppWebViewGroupOptions(
-            crossPlatform: InAppWebViewOptions(
-                supportZoom: false, javaScriptEnabled: true),
+      child: WillPopScope(
+        onWillPop: () async {
+          if (await webViewController.canGoBack()) {
+            webViewController.goBack();
+            return false;
+          }
+          return true;
+        },
+        child: Scaffold(
+          body: InAppWebView(
+            onWebViewCreated: (InAppWebViewController controller) {
+              webViewController = controller;
+            },
+            initialOptions: InAppWebViewGroupOptions(
+              crossPlatform: InAppWebViewOptions(
+                  supportZoom: false, javaScriptEnabled: true),
+            ),
+            initialUrlRequest:
+                URLRequest(url: Uri.parse('https://kaizen.deepsense.dev/')),
           ),
-          initialUrlRequest:
-              URLRequest(url: Uri.parse('https://kaizen.deepsense.dev/')),
         ),
       ),
     );
