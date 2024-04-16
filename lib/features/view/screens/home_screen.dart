@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
@@ -7,11 +10,20 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+RemoteMessage? remoteMessage;
 
 class _HomeScreenState extends State<HomeScreen> {
   late InAppWebViewController webViewController;
   @override
   Widget build(BuildContext context) {
+    final messageData = ModalRoute.of(context)?.settings.arguments;
+    if(messageData != null){
+      setState(() {
+        remoteMessage = RemoteMessage.fromMap(jsonDecode(messageData.toString()));
+        print(remoteMessage);
+      });
+    }
+
     return SafeArea(
       child: WillPopScope(
         onWillPop: () async {
@@ -31,10 +43,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   supportZoom: false, javaScriptEnabled: true),
             ),
             initialUrlRequest:
-                URLRequest(url: Uri.parse('https://kaizen.deepsense.dev/')),
+                URLRequest(url: Uri.parse(remoteMessage == null?'https://www.impacteers.com/':remoteMessage!.notification!.body.toString())),
           ),
         ),
       ),
     );
   }
 }
+

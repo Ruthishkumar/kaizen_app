@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "325441726783",
+    "project_id": "kaizenapp-3994f",
+    "storage_bucket": "kaizenapp-3994f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:325441726783:android:7763663c31eba515d34b8a",
+        "android_client_info": {
+          "package_name": "in.ds.kaizen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa0jkWrI2MkzUuOYYbUdg97ysR9umXDgA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
